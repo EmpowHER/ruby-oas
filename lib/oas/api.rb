@@ -29,7 +29,10 @@ module Oas
           "String_4" => xml.to_xml
         }
       end
+      # response = Hash.from_xml(response.to_hash[:oas_xml_request_response][:result]).recursive_symbolize_keys![:AdXML][:Response]
+      binding.pry
       response = Hash.from_xml(response.to_hash[:oas_xml_request_response][:result])[:AdXML][:Response]
+      binding.pry
       verify_errors(response)
       response
     end
