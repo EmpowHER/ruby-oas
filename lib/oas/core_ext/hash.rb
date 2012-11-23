@@ -60,7 +60,6 @@ Hash.class_eval do
           return nil
         end
       else
-        binding.pry
         return prepare(node.content.to_s)
       end
     end
