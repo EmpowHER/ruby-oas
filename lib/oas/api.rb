@@ -5,7 +5,7 @@ require 'savon'
 module Oas
   class Api
     attr_accessor *Configuration::VALID_OPTIONS_KEYS
-      
+
     def initialize(options={})
       options = Oas.options.merge(options)
       Configuration::VALID_OPTIONS_KEYS.each do |key|
@@ -30,13 +30,11 @@ module Oas
         }
       end
       # response = Hash.from_xml(response.to_hash[:oas_xml_request_response][:result]).recursive_symbolize_keys![:AdXML][:Response]
-      binding.pry
-      response = Hash.from_xml(response.to_hash[:oas_xml_request_response][:result])[:AdXML][:Response]
-      binding.pry
+      response = Hash.from_xml_symbolize_keys(response.to_hash[:oas_xml_request_response][:result])[:AdXML][:Response]
       verify_errors(response)
       response
     end
-  
+
     private
     def verify_errors(response)
       return if ((e = response[:Exception]).nil? && (!response[response.keys.first].is_a?(Hash) || (e = response[response.keys.first][:Exception]).nil?))
@@ -51,7 +49,7 @@ module Oas
          raise Oas::Error.new(error_msg, error_code)
       end
     end
-    
+
     def webservice
       @webservice ||= Savon::Client.new(endpoint)
     end

@@ -20,10 +20,8 @@ Hash.class_eval do
         }
     end
     # class << self
-    def from_xml(xml_io)
-      binding.pry
+    def from_xml_symbolize_keys(xml_io)
       result = Nokogiri::XML(xml_io)
-      binding.pry
       return { result.root.name.to_sym => Hash.xml_node_to_hash(result.root) }
     end
 
