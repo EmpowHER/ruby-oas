@@ -18,11 +18,13 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
-  
+
   s.add_dependency "httpclient", "~> 2.2.0.2"
+
   s.add_dependency "nokogiri", "~> 1.5"
+
   s.add_dependency "savon", "~> 0.9.2"
-  
+
   s.add_development_dependency "rake", "~> 0.9.2.2"
   s.add_development_dependency "rspec", "~> 2.5.0"
   s.add_development_dependency "webmock", "~> 1.6.2"
